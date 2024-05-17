@@ -1,0 +1,606 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+/*
+'Bebas Neue' is licensed under the Open Font License.
+https://fonts.google.com/specimen/Bebas+Neue
+*/
+
+
+/* 基本設定 */
+html {
+    background: transparent;
+    font-size: 62.5%;
+}
+
+body {
+    min-height: 100vh;
+    background: #ffffff;
+    color: #323538;
+    font-size: 1.3rem;
+    font-family: 'メイリオ', 'ヒラギノ角ゴ', sans-serif;
+    letter-spacing: 0.2em;
+    line-height: 1.8;
+}
+
+body::before,
+body::after {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100vh;
+}
+
+body::before {
+    background: url('../img/logo.png') 50% 10% / 130vh no-repeat #a5a4a1;
+    filter: grayscale(80%);
+}
+
+body::after {
+    transition: .8s;
+}
+
+.fadeIn::after {
+    background: rgba(255, 255, 255, .4);
+}
+
+a {
+    text-decoration: none;
+}
+
+h2,
+h3,
+h4 {
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Bebas Neue', cursive;
+}
+
+h2 {
+    padding: .3em 0;
+    margin: 1em 0 2em;
+
+    font-size: 1.3em;
+    font-weight: normal;
+    text-align: center;
+}
+
+h3 {
+    display: inline-block;
+    padding: .3em 1em;
+    margin: 1em 0;
+    border: #77756f solid 2px;
+    font-weight: normal;
+}
+
+h4 {
+    display: block;
+    padding: 0 .2em;
+    margin: .5em 0;
+    font-weight: normal;
+}
+
+h4::before {
+    content: '//';
+    margin-right: 1em;
+    color: #77756f;
+}
+
+em {
+    background: #e0dbce;
+    font-style: normal;
+}
+
+strong {
+    background: #77756f;
+    color: #ffffff;
+}
+
+input[type],
+textarea,
+button,
+select {
+    border: #a5a4a1 solid 1px;
+    font-family: inherit;
+    font-size: 100%;
+    letter-spacing: .1em;
+    line-height: inherit;
+}
+
+ul,
+dl,
+ol {
+    list-style: none;
+}
+
+
+/* 段落 */
+p {
+    padding: 0 1em;
+}
+
+section {
+    margin: 2em 0;
+}
+
+section[id] {
+    scroll-margin-top: 5vh;
+    scroll-snap-margin-top: 5vh;
+    /* safari用 */
+}
+
+
+/* 余白、基本リンク色 */
+.space {
+    margin: 2em 1em;
+}
+
+.box {
+    margin: 10vh 0;
+}
+
+.wrap {
+    padding: 1em 0;
+    margin: 10vh 30% 10vh auto;
+    width: 50%;
+    min-width: 600px;
+}
+
+.wrap a {
+    color: #a5a4a1;
+    transition: .3s;
+}
+
+.wrap a:hover {
+    color: #55534e;
+}
+
+
+/* アルバムページ */
+.album {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.album li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em calc(10% / 3) 2em 0;
+    width: 30%;
+}
+
+.illustTitle {
+    color: #a5a4a1;
+}
+
+.album li img {
+    width: 100%;
+    background: #e0dbce;
+}
+
+/* 拡大後のスタイル */
+li.active {
+    flex-direction: column-reverse;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .8);
+    z-index: 3;
+}
+
+.active .illustTitle {
+    padding: 0 1em;
+    color: #e0dbce;
+}
+
+.active .illustTitle::after {
+    content: '×';
+    margin-left: 1em;
+}
+
+.active>.thumb {
+    margin-top: 2em;
+    height: 80vh;
+    width: auto;
+}
+
+.active+li {
+    margin-right: auto;
+}
+
+
+/* メモページ */
+.diary {
+    margin-top: 20vh;
+}
+
+.diary article {
+    position: relative;
+    padding: 2em 1em;
+    margin: 5vh 0;
+}
+
+.date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem .5em;
+    background: url('../img/design59_2.jpg') center / contain;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4em;
+    font-weight: bolder;
+    letter-spacing: 0;
+    filter: grayscale(100%);
+}
+
+.Article {
+    position: relative;
+    margin-top: 4em;
+    z-index: 2;
+}
+
+.more {
+    position: relative;
+    padding: 1em 0;
+    text-align: right;
+    z-index: 2;
+}
+
+.more a {
+    color: #77756f;
+    cursor: pointer;
+    padding: 1em 2em;
+}
+
+.moreArticle {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.active+.moreArticle {
+    height: 100%;
+    opacity: 1;
+    transition: opacity .3s .3s;
+}
+
+
+/* メールフォーム */
+form .enter {
+    padding: .2em;
+    margin: .5em 0;
+    width: 60%;
+}
+
+textarea.enter {
+    height: 7em;
+}
+
+form .button {
+    padding: .2em 1em;
+    margin-right: 1em;
+    background: #77756f;
+    border: none;
+    color: #ffffff;
+}
+
+
+/* リスト */
+.listYoko {
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+.listYoko li {
+    margin-right: 1em;
+}
+
+.listYoko.slash li {
+    margin: 0;
+}
+
+.listYoko.slash li::before {
+    content: '/';
+    margin: 0 1em;
+    color: #a5a4a1;
+}
+
+.listYoko.slash li:first-of-type::before {
+    content: none;
+}
+
+.listTate dd {
+    margin-left: 1em;
+    color: #a5a4a1;
+    font-size: .9em;
+}
+
+*[class^="list"] .listTitle {
+    display: inline-block;
+    padding: 0 .5em;
+    background: #77756f;
+    color: #ffffff;
+}
+
+
+/* ヘッダー */
+.mainHeader {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10vh 40% 10vh auto;
+    width: 40%;
+    min-width: 500px;
+    min-height: 70vh;
+}
+
+.mainHeader::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    right: calc(50% - 35vh);
+    width: 60vh;
+    height: 60vh;
+    background: url('../img/logo.png') center / contain #a5a4a1;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.siteInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 5vh;
+    max-width: 40%;
+    min-width: 200px;
+}
+
+.siteInfo>* {
+    padding: .5rem 3rem;
+    margin: 1rem;
+    background: #77756f;
+    color: #ffffff;
+    word-break: break-all;
+}
+
+.siteInfo h1 {
+    font-size: 1.5em;
+}
+
+.siteInfo>div,
+.siteInfo>span {
+    font-size: .8em;
+}
+
+.accent {
+    color: #e0dbce;
+}
+
+
+/* ナビゲーション */
+.mainNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2em;
+    width: 100%;
+    min-height: 5vh;
+    box-sizing: border-box;
+    font-family: 'Bebas Neue', cursive;
+    text-align: right;
+    z-index: 2;
+}
+
+.mainNav ul {
+    display: flex;
+}
+
+.mainNav li {
+    margin: 0 1em;
+}
+
+.mainNav li a {
+    padding: .2em 1em;
+    color: #000000;
+    font-size: 1.2em;
+    transition: .3s;
+}
+
+.mainNav li a:hover {
+    background: rgba(255, 255, 255, .4);
+    color: #77756f;
+}
+
+
+/* トップに戻るボタン */
+.backTop {
+    position: relative;
+    font-family: 'Bebas Neue', cursive;
+    text-align: right;
+}
+
+.backTop a {
+    padding: 1em;
+    color: #323538;
+    cursor: pointer;
+}
+
+
+/* フッター※削除OK */
+.mainFooter {
+    display: none;
+    margin: 5vh 30% 5vh auto;
+    width: 50%;
+    min-width: 600px;
+    color: #cfcdc8;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.mainFooter a {
+    color: #a5a4a1;
+}
+
+/* PC版非表示用 */
+@media (min-width:1001px) {
+    .mobile {
+        display: none;
+    }
+}
+
+/* 画面幅1000px以下用 */
+@media (max-width:1001px) {
+    body {
+        font-size: 1.1rem;
+    }
+
+    body::before,
+    body::after {
+        width: 3%;
+    }
+
+    h2 {
+        margin-bottom: 1em;
+    }
+
+    .box {
+        padding: 0;
+        margin: 2em 0;
+    }
+
+    .wrap {
+        margin: 0 auto 5vh;
+        width: 90%;
+        min-width: 200px;
+        max-width: 500px;
+    }
+
+    .space {
+        margin: 1em;
+    }
+
+    .diary {
+        margin-top: 10vh;
+    }
+
+    .active>.thumb {
+        height: auto;
+        width: 90vw;
+    }
+
+    form .enter {
+        width: 90%;
+    }
+
+    .mainHeader {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin: 15vh auto 10vh;
+        width: 330px;
+        max-width: 330px;
+        min-width: 200px;
+        color: #c7c4bd;
+        min-height: 30vh;
+    }
+
+    .mainHeader::before {
+        position: absolute;
+        top: -2em;
+        left: 0;
+
+        width: 250px;
+        min-width: 200px;
+        max-width: 300px;
+        height: 250px;
+        min-height: 200px;
+        max-height: 300px;
+    }
+
+    .siteInfo {
+        max-width: 180px;
+        min-width: 150px;
+    }
+
+    .siteInfo>* {
+        padding: .5em 1rem;
+        margin: .5em 0;
+    }
+
+    .mainNav {
+
+        display: block;
+        position: relative;
+        padding: 2em;
+        margin: auto;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .mainNav ul {
+        flex-wrap: wrap;
+    }
+
+    .mainNav li {
+        margin: .2em 0;
+    }
+
+    .mainNav li a {
+        font-size: 1em;
+    }
+
+    .mainFooter {
+        margin: 2em auto;
+        width: 90%;
+        min-width: 200px;
+    }
+
+    .mainFooter::after {
+        content: none;
+    }
+
+    .backTop {
+        position: sticky;
+        bottom: 1em;
+        margin-left: auto;
+        width: 5em;
+    }
+
+    .pc {
+        display: none;
+    }
+}
+
+/* 画面幅380px以下用 */
+@media (max-width:380px) {
+    .mainHeader {
+        margin: 10vh auto 5vh;
+        width: 250px;
+    }
+
+    .mainHeader::before {
+        width: 200px;
+        height: 200px;
+    }
+
+    .siteInfo {
+        max-width: 140px;
+    }
+}
